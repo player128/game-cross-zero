@@ -1,0 +1,1 @@
+export { GameList } from './containers/game-list'
