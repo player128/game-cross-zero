@@ -26,7 +26,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         // ${geistSans.variable} ${geistMono.variable}
-        className={` antialiased dark`}
+        className={` antialiased dark flex flex-col grow min-h-screen`}
       >
         {children}
       </body>
