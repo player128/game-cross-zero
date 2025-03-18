@@ -22,6 +22,7 @@ export async function createGame(player: PlayerEntity) {
         id: cuid(),
         creator: player,
         status: 'idle',
+        field: Array(9).fill(null),
     });
 
     return right(createdGame);

@@ -9,7 +9,7 @@ export function GameField(
 }: 
 {
     game: GameDomain.GameEntity;
-    onCellClick: (index: number) => void;
+    onCellClick?: (index: number) => void;
 }) {
     return (
         <div className="grid grid-cols-3">
@@ -17,7 +17,7 @@ export function GameField(
                 <button 
                     className='border border-primary w-10 h-10 flex justify-center items-center' 
                     key={index}
-                    onClick={() => onCellClick(index)}
+                    onClick={() => onCellClick?.(index)}
                 >
                     {symbol ?? ''}
                 </button>))}
