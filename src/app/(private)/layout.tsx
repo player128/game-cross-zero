@@ -1,4 +1,5 @@
 import { sessionServise } from "@/entities/user/server";
+import { routes } from "@/kernel/routes";
 import { Button } from "@/shared/ui/button";
 import { redirect } from "next/navigation";
 
@@ -16,7 +17,7 @@ export default async function PrivateLayout({
                     'use server';
 
                     sessionServise.deleteSession();
-                    redirect('/sign-in');
+                    redirect(routes.signIn());
                 }}>
                     <Button>Sign out</Button>
                 </form>
