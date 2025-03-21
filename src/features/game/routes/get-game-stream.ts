@@ -21,10 +21,11 @@ export async function getGameStream(
 
     write(game);
 
-    addCloseListener(gameEvents.addListener(game.id, (event) => {
-        console.log(event, ' event');
-        write(event.data);
-    }));
+    addCloseListener(
+        await gameEvents.addListener(game.id, (event) => {
+            write(event.data);
+        }),
+    );
 
     return response;
 }
