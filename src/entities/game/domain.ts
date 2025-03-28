@@ -49,7 +49,7 @@ export const GameSymbol = {
 export const getGameCurrenSymbol = (game: GameInProgressEntity | GameOverEntity | GameOverDrawEntity)  => {
     const symbolds = game.field.filter(s => s !== null).length;
 
-    return symbolds % 1 === 0 ? GameSymbol.X  : GameSymbol.O;
+    return symbolds % 2 === 0 ? GameSymbol.X  : GameSymbol.O;
 }
 
 export const getGameNextSymbol = (gameSymbol: GameSymbol) => {
@@ -58,7 +58,7 @@ export const getGameNextSymbol = (gameSymbol: GameSymbol) => {
         : GameSymbol.X);
 }
 
-export const getPlayerSymbol = (player: PlayerEntity, game: GameInProgressEntity) => {
+export const getPlayerSymbol = (player: PlayerEntity, game: GameInProgressEntity | GameOverEntity) => {
     const index = game.players.findIndex(p => p.id === player.id);
 
     return {
@@ -69,9 +69,8 @@ export const getPlayerSymbol = (player: PlayerEntity, game: GameInProgressEntity
 
 export const doStep = (game: GameInProgressEntity, index: number, player: PlayerEntity) => {
     const currentSymbol = getGameCurrenSymbol(game);
-    const nextSymbol = getGameNextSymbol(currentSymbol);
 
-    if (nextSymbol !== getPlayerSymbol(player, game)) {
+    if (currentSymbol !== getPlayerSymbol(player, game)) {
         return left("not-player-symbol");
     }
 
@@ -79,7 +78,7 @@ export const doStep = (game: GameInProgressEntity, index: number, player: Player
         return left("game-cell-allready-has-symbol")
     }
 
-    const newField = game.field.map((cell, i) => i === index ? nextSymbol : cell);
+    const newField = game.field.map((cell, i) => i === index ? currentSymbol : cell);
 
     if (calculateWinner(newField)) {
         return right({

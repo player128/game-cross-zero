@@ -14,7 +14,7 @@ export function GameStatus({ game }: {
             </div>);
         }
         case "gameOver": {
-            const currentSybmbol = GameDomain.getGameCurrenSymbol(game);
+            const currentSybmbol = GameDomain.getPlayerSymbol(game.winner, game);
             return <div className="text-lg">Победитель: {currentSybmbol}</div>;
         }
         case "gameOverDraw":
